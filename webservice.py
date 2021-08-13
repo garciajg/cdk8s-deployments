@@ -18,9 +18,9 @@ class WebService(Construct):
         # Creating the Service class that will be translated to a yaml Kube config file
         k8s.KubeService(self, 'service',
                         spec=k8s.ServiceSpec(
-                            type='LoadBalancer',
+                            type='NodePort',
                             ports=[
-                                k8s.ServicePort(port=port, target_port=k8s.IntOrString.from_number(container_port))
+                                k8s.ServicePort(port=port, node_port=30080, target_port=k8s.IntOrString.from_number(container_port))
                             ],
                             selector=label
                         )
